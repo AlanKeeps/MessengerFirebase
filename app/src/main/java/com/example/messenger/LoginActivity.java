@@ -2,6 +2,7 @@ package com.example.messenger;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //launch intent to register activity
+                Intent intent = RegistrationActivity.newIntent(LoginActivity.this);
+                startActivity(intent);
             }
         });
         textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
