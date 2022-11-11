@@ -14,4 +14,5 @@
     <string name="forgot_password_title">Forgot password</string>
     <string name="reset_password">Reset password</string>
     <string name="logout">Logout</string>
+    <string name="reset_link">the reset link sent</string>
 </resources>
