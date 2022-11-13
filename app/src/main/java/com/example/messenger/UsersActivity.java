@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ public class UsersActivity extends AppCompatActivity {
     private UsersAdapter usersAdapter;
     private UsersViewModel viewModel;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,15 +34,6 @@ public class UsersActivity extends AppCompatActivity {
         initViews();
         viewModel = new ViewModelProvider(this).get(UsersViewModel.class);
         observeViewModel();
-
-        List<User> users = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            User user = new User(
-                    "id" + i, "name " + i, "lastName" + i, i, new Random().nextBoolean()
-            );
-            users.add(user);
-        }
-        usersAdapter.setUsers(users);
     }
 
     private void initViews() {
@@ -57,6 +51,12 @@ public class UsersActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
+            }
+        });
+        viewModel.getUsers().observe(this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(List<User> users) {
+                usersAdapter.setUsers(users);
             }
         });
     }
