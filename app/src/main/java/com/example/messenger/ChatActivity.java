@@ -24,7 +24,7 @@ public class ChatActivity extends AppCompatActivity {
     private static final String EXTRA_OTHER_USER_ID = "other_id";
 
     private TextView textViewTitle;
-    private View OnlineStatus;
+    private View onlineStatus;
     private RecyclerView recyclerViewMessages;
     private EditText editTextMessage;
     private ImageView imageViewSendMessage;
@@ -90,6 +90,14 @@ public class ChatActivity extends AppCompatActivity {
             public void onChanged(User user) {
                 String userInfo = String.format("%s %s", user.getName(), user.getLastName());
                 textViewTitle.setText(userInfo);
+                int bgResId;
+                if (user.isOnline()) {
+                    bgResId = R.drawable.circle_green;
+                } else {
+                    bgResId = R.drawable.circle_red;
+                }
+                Drawable background = ContextCompat.getDrawable(ChatActivity.this, bgResId);
+                onlineStatus.setBackground(background);
             }
         });
     }
@@ -108,7 +116,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void initViews() {
         textViewTitle = findViewById(R.id.textViewTitle);
-        OnlineStatus = findViewById(R.id.OnlineStatus);
+        onlineStatus = findViewById(R.id.OnlineStatus);
         recyclerViewMessages = findViewById(R.id.recyclerViewMessages);
         editTextMessage = findViewById(R.id.editTextMessage);
         imageViewSendMessage = findViewById(R.id.imageViewSendMessage);

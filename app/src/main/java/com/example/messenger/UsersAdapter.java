@@ -68,7 +68,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         void onUserClick(User user);
     }
 
-    static class UserViewHolder extends RecyclerView.ViewHolder {
+    class UserViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewUserInfo;
         private View onlineStatus;
